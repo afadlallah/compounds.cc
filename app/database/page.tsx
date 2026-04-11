@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { COMPOUNDS, CATEGORIES } from "@/lib/data/seed-compounds";
 import CompoundGrid from "./compound-grid";
 
@@ -6,6 +7,8 @@ export const metadata: Metadata = {
   title: "Database",
   description: "Every compound in the library, searchable and filtered by category.",
 };
+
+const allTags = [...new Set(COMPOUNDS.flatMap((c) => c.tags))].sort();
 
 export default function DatabasePage() {
   return (
@@ -23,7 +26,9 @@ export default function DatabasePage() {
         </p>
       </header>
 
-      <CompoundGrid compounds={COMPOUNDS} categories={CATEGORIES} />
+      <Suspense fallback={<p className="text-sm text-muted-foreground">Loading filters…</p>}>
+        <CompoundGrid compounds={COMPOUNDS} categories={CATEGORIES} tags={allTags} />
+      </Suspense>
     </div>
   );
 }

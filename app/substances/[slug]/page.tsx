@@ -7,6 +7,8 @@ import { createClient } from "@/lib/supabase/server";
 import { ReviewsSection } from "./reviews-section";
 import { ReviewForm } from "./review-form";
 import { BookmarkButton } from "./bookmark-button";
+import { ProtocolMentions } from "./protocol-mentions";
+import { ShareRow } from "@/components/compound/share-row";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -72,6 +74,10 @@ export default async function CompoundPage({ params }: Props) {
         <span className="mx-2">/</span>
         <span className="uppercase tracking-wide">{categoryLabel}</span>
       </nav>
+
+      <div className="mb-4">
+        <ShareRow slug={compound.slug} name={compound.name} />
+      </div>
 
       <header className="mb-10 border-b border-border pb-10">
         <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -162,6 +168,7 @@ export default async function CompoundPage({ params }: Props) {
         </Section>
       )}
 
+      <ProtocolMentions compoundSlug={compound.slug} />
       <ReviewsSection compoundSlug={compound.slug} />
       <ReviewForm compoundId="" slug={compound.slug} isSignedIn={isSignedIn} />
 

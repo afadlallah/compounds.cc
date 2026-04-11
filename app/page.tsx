@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { SuggestForm } from "@/components/forms/suggest-form";
 
 export default function HomePage() {
   return (
@@ -80,6 +81,16 @@ export default function HomePage() {
             protocol. Evidence is uneven. Talk to a clinician.
           </p>
         </div>
+      </section>
+
+      <section className="mt-16 rounded-xl border border-border bg-muted/30 p-8">
+        <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.2em]">
+          Missing a compound?
+        </h2>
+        <p className="mt-2 mb-4 text-sm text-muted-foreground">
+          Suggest a compound you&apos;d like us to add to the database.
+        </p>
+        <SuggestForm />
       </section>
     </div>
   );

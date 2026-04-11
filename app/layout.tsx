@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { MedicalDisclaimer } from "@/components/layout/medical-disclaimer";
 import { websiteJsonLd } from "@/lib/seo/jsonld";
 import { Toaster } from "sonner";
+import { CommandPalette } from "@/components/layout/command-palette";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -69,6 +70,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <SiteFooter />
           <Toaster richColors position="top-right" />
+          <CommandPalette />
         </ThemeProvider>
       </body>
     </html>
