@@ -3,6 +3,10 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { COMPOUNDS, CATEGORIES, USE_CASES } from "@/lib/data/seed-compounds";
 import { compoundJsonLd } from "@/lib/seo/jsonld";
+import { createClient } from "@/lib/supabase/server";
+import { ReviewsSection } from "./reviews-section";
+import { ReviewForm } from "./review-form";
+import { BookmarkButton } from "./bookmark-button";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -26,6 +30,17 @@ export default async function CompoundPage({ params }: Props) {
   const { slug } = await params;
   const compound = COMPOUNDS.find((c) => c.slug === slug);
   if (!compound) notFound();
+
+  let isSignedIn = false;
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    isSignedIn = !!user;
+  } catch {
+    // Supabase not configured — treat as signed out
+  }
 
   const categoryLabel =
     CATEGORIES.find((c) => c.slug === compound.category)?.name ?? compound.category;
@@ -62,9 +77,17 @@ export default async function CompoundPage({ params }: Props) {
         <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
           {categoryLabel}
         </p>
-        <h1 className="font-mono text-4xl font-bold tracking-tight sm:text-5xl">
-          {compound.name}
-        </h1>
+        <div className="flex items-start justify-between gap-4">
+          <h1 className="font-mono text-4xl font-bold tracking-tight sm:text-5xl">
+            {compound.name}
+          </h1>
+          <BookmarkButton
+            compoundId=""
+            slug={compound.slug}
+            initialBookmarked={false}
+            isSignedIn={isSignedIn}
+          />
+        </div>
         <p className="mt-4 max-w-2xl text-base text-muted-foreground leading-relaxed">
           {compound.summary}
         </p>
@@ -138,6 +161,9 @@ export default async function CompoundPage({ params }: Props) {
           </ul>
         </Section>
       )}
+
+      <ReviewsSection compoundSlug={compound.slug} />
+      <ReviewForm compoundId="" slug={compound.slug} isSignedIn={isSignedIn} />
 
       <aside className="mt-12 rounded-lg border border-amber-500/30 bg-amber-500/5 p-5 text-xs text-amber-900 dark:text-amber-200">
         <p className="font-semibold uppercase tracking-wide">Medical disclaimer</p>
