@@ -1,0 +1,250 @@
+/* Scoped styles for the 5AR landing. Does not leak to the rest of the app. */
+
+.five-ar-root {
+  /* Apothecary Noir palette */
+  --ink: #0b0a08;
+  --ink-2: #100e0b;
+  --ink-3: #16130f;
+  --surface: #1a1713;
+  --surface-2: #201c17;
+  --hair: #2a2620;
+  --hair-bright: #3a342b;
+  --bone: #f5efe2;
+  --bone-2: #e8e1d1;
+  --fog: #a59f90;
+  --fog-2: #746e61;
+  --gold: #c8a568;
+  --gold-soft: #d9bd8a;
+  --gold-deep: #8a6f42;
+  --clay: #b5513b;
+  --moss: #6c7a4a;
+
+  --font-display: var(--font-display), "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: var(--font-sans-5ar), "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01" 1, "cv11" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.005em;
+  min-height: 100vh;
+}
+
+.five-ar-root ::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* ——— Typographic primitives ——— */
+
+.five-ar-root .serif {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+}
+
+.five-ar-root .caps {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.five-ar-root .hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hair-bright) 20%, var(--hair-bright) 80%, transparent);
+}
+
+.five-ar-root .hairline-solid {
+  height: 1px;
+  background: var(--hair);
+}
+
+.five-ar-root .hairline-v {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--hair-bright) 20%, var(--hair-bright) 80%, transparent);
+}
+
+/* ——— Buttons ——— */
+
+.five-ar-root .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1), background 240ms, color 240ms, border-color 240ms;
+  cursor: pointer;
+  border: 1px solid transparent;
+  line-height: 1;
+}
+
+.five-ar-root .btn-primary {
+  background: var(--bone);
+  color: var(--ink);
+}
+.five-ar-root .btn-primary:hover {
+  background: var(--gold-soft);
+  transform: translateY(-1px);
+}
+
+.five-ar-root .btn-ghost {
+  background: transparent;
+  color: var(--bone);
+  border-color: var(--hair-bright);
+}
+.five-ar-root .btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold-soft);
+}
+
+.five-ar-root .btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+}
+.five-ar-root .btn-gold:hover {
+  background: var(--gold-soft);
+  transform: translateY(-1px);
+}
+
+/* ——— Marquee ——— */
+.five-ar-root .marquee {
+  display: flex;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.five-ar-root .marquee-track {
+  display: flex;
+  gap: 3rem;
+  flex-shrink: 0;
+  min-width: 100%;
+  animation: marquee 42s linear infinite;
+}
+@keyframes marquee {
+  to { transform: translateX(-100%); }
+}
+
+/* ——— Product card ——— */
+
+.five-ar-root .product {
+  position: relative;
+  background: var(--ink-2);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 28px 24px 24px;
+  transition: border-color 260ms, transform 260ms, background 260ms;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+}
+.five-ar-root .product::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background: radial-gradient(120% 80% at 50% 0%, rgba(200, 165, 104, 0.08), transparent 60%);
+  opacity: 0;
+  transition: opacity 400ms;
+  pointer-events: none;
+}
+.five-ar-root .product:hover {
+  border-color: var(--gold-deep);
+  transform: translateY(-2px);
+  background: #14110d;
+}
+.five-ar-root .product:hover::before { opacity: 1; }
+
+.five-ar-root .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--hair-bright);
+  border-radius: 999px;
+  color: var(--fog);
+}
+.five-ar-root .pill-gold {
+  border-color: var(--gold-deep);
+  color: var(--gold-soft);
+}
+.five-ar-root .pill-clay {
+  border-color: rgba(181, 81, 59, 0.5);
+  color: #d98d76;
+}
+
+/* ——— Fade-in ——— */
+.five-ar-root .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: reveal 800ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.five-ar-root .reveal-d1 { animation-delay: 80ms; }
+.five-ar-root .reveal-d2 { animation-delay: 160ms; }
+.five-ar-root .reveal-d3 { animation-delay: 240ms; }
+.five-ar-root .reveal-d4 { animation-delay: 320ms; }
+@keyframes reveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ——— Grain overlay ——— */
+.five-ar-root .grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.05 0 0 0 0 0.05 0 0 0 0.8 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ——— Numerals ——— */
+.five-ar-root .tabular { font-variant-numeric: tabular-nums; }
+
+/* ——— Accordion ——— */
+.five-ar-root details.faq {
+  border-bottom: 1px solid var(--hair);
+  padding: 22px 0;
+}
+.five-ar-root details.faq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--bone);
+  transition: color 240ms;
+}
+.five-ar-root details.faq summary::-webkit-details-marker { display: none; }
+.five-ar-root details.faq summary:hover { color: var(--gold-soft); }
+.five-ar-root details.faq summary .faq-icon {
+  font-size: 22px;
+  color: var(--gold);
+  transition: transform 300ms;
+  line-height: 1;
+}
+.five-ar-root details[open].faq summary .faq-icon { transform: rotate(45deg); }
+.five-ar-root details.faq .faq-body {
+  padding-top: 14px;
+  color: var(--fog);
+  max-width: 62ch;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* ——— Small helpers ——— */
+.five-ar-root a { color: inherit; text-decoration: none; }
+.five-ar-root button { font: inherit; }
+.five-ar-root img, .five-ar-root svg { display: block; max-width: 100%; }
