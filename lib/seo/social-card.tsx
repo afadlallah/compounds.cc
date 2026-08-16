@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
-export const socialCardAlt = "Compounds.cc — Research Database";
+export const socialCardAlt =
+  "Compounds.cc — Research Reference Database with Retrieval-Grounded AI";
 export const socialCardSize = {
   width: 1200,
   height: 630,

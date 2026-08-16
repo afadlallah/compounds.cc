@@ -39,6 +39,15 @@ export const metadata: Metadata = {
     description:
       "An evidence-forward reference library of nootropics, peptides, and supplements. Educational only — not medical advice.",
     url: siteUrl,
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Compounds.cc — Research Reference Database with Retrieval-Grounded AI",
+        type: "image/png",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -46,6 +55,7 @@ export const metadata: Metadata = {
       "Compounds.cc — Research Reference Database with Retrieval-Grounded AI",
     description:
       "An evidence-forward reference library of nootropics, peptides, and supplements.",
+    images: ["/og.png"],
   },
   robots: {
     index: true,
