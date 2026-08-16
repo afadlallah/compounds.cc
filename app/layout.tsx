@@ -25,7 +25,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Compounds.cc — Research Database",
+    default:
+      "Compounds.cc — Research Reference Database with Retrieval-Grounded AI",
     template: "%s · Compounds.cc",
   },
   description:
@@ -33,14 +34,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Compounds.cc",
-    title: "Compounds.cc — Research Database",
+    title:
+      "Compounds.cc — Research Reference Database with Retrieval-Grounded AI",
     description:
       "An evidence-forward reference library of nootropics, peptides, and supplements. Educational only — not medical advice.",
     url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compounds.cc — Research Database",
+    title:
+      "Compounds.cc — Research Reference Database with Retrieval-Grounded AI",
     description:
       "An evidence-forward reference library of nootropics, peptides, and supplements.",
   },
