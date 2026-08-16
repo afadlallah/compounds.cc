@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -32,10 +33,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Compounds.cc",
+    title: "Compounds.cc — Research Database",
+    description:
+      "An evidence-forward reference library of nootropics, peptides, and supplements. Educational only — not medical advice.",
     url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
+    title: "Compounds.cc — Research Database",
+    description:
+      "An evidence-forward reference library of nootropics, peptides, and supplements.",
   },
   robots: {
     index: true,
@@ -45,7 +52,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{ children: ReactNode }>) {
   const websiteStructuredData = websiteJsonLd();
 
   return (
